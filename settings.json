@@ -1,0 +1,33 @@
+{
+    "server": {
+        "port": 9000
+    },
+    "logger": {
+        "appenders": [
+            {
+                "type": "file",
+                "filename": "logs/wugmsNodeSSHPoller.log",
+                "maxLogSize": 1048576,
+                "backups": 10,
+                "category": "wugmsNodeSSHPoller"
+            }
+        ]
+    },
+    "wugms": {
+        "user": "wugms",
+        "ssh_key": "wugms.rsa.id"
+    },
+    "database": {
+        "username": "wugms_dev",
+        "password": "wugms_dev",
+        "schema": "wugms_dev",
+        "host": "192.168.72.1",
+        "port": 3306
+    },
+    "mqtt": {
+        "server": "localhost",
+        "user": "wugmsbgp",
+        "password": "wugmsbgp",
+        "queuename": "wugms/bgp/peers"
+    }
+}

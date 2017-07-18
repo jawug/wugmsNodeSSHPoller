@@ -1,0 +1,359 @@
+{
+    "ap_client": [{
+            "name": "interface",
+            "type": "string",
+            "default_value": ""
+        },
+        {
+            "name": "radio_name",
+            "type": "string",
+            "default_value": ""
+        },
+        {
+            "name": "mac_address",
+            "type": "string",
+            "default_value": "00:00:00:00:00:00"
+        },
+        {
+            "name": "ap",
+            "type": "string",
+            "default_value": "no"
+        },
+        {
+            "name": "wds",
+            "type": "string",
+            "default_value": "no"
+        },
+        {
+            "name": "bridge",
+            "type": "string",
+            "default_value": "no"
+        },
+        {
+            "name": "rx_rate",
+            "type": "string",
+            "default_value": ""
+        },
+        {
+            "name": "tx_rate",
+            "type": "string",
+            "default_value": ""
+        },
+        {
+            "name": "packets",
+            "type": "split",
+            "sub_fields": [{
+                    "name": "tx",
+                    "split_regex": "(\\d+),",
+                    "default_value": "0"
+                },
+                {
+                    "name": "rx",
+                    "split_regex": ",(\\d+)",
+                    "default_value": "0"
+                }]
+        },
+        {
+            "name": "bytes",
+            "type": "split",
+            "sub_fields": [{
+                    "name": "tx",
+                    "split_regex": "(\\d+),",
+                    "default_value": "0"
+                },
+                {
+                    "name": "rx",
+                    "split_regex": ",(\\d+)",
+                    "default_value": "0"
+                }]
+        },
+        {
+            "name": "frames",
+            "type": "split",
+            "sub_fields": [{
+                    "name": "tx",
+                    "split_regex": "(\\d+),",
+                    "default_value": "0"
+                },
+                {
+                    "name": "rx",
+                    "split_regex": ",(\\d+)",
+                    "default_value": "0"
+                }]
+        },
+        {
+            "name": "frame_bytes",
+            "type": "split",
+            "sub_fields": [{
+                    "name": "tx",
+                    "split_regex": "(\\d+),",
+                    "default_value": "0"
+                },
+                {
+                    "name": "rx",
+                    "split_regex": ",(\\d+)",
+                    "default_value": "0"
+                }]
+        },
+        {
+            "name": "uptime",
+            "type": "string",
+            "default_value": ""
+        },
+        {
+            "name": "last_activity",
+            "type": "string",
+            "default_value": ""
+        },
+        {
+            "name": "signal_strength",
+            "type": "string",
+            "default_value": ""
+        },
+        {
+            "name": "signal_to_noise",
+            "type": "number",
+            "default_value": ""
+        },
+        {
+            "name": "signal_strength_ch0",
+            "type": "number",
+            "default_value": "0"
+        },
+        {
+            "name": "signal_strength_ch1",
+            "type": "number",
+            "default_value": "0"
+        },
+        {
+            "name": "tx_signal_strength_ch0",
+            "type": "number",
+            "default_value": "0"
+        },
+        {
+            "name": "tx_signal_strength",
+            "type": "number",
+            "default_value": "0"
+        },
+        {
+            "name": "tx_ccq",
+            "type": "number",
+            "default_value": "0"
+        },
+        {
+            "name": "rx_ccq",
+            "type": "number",
+            "default_value": "0"
+        },
+        {
+            "name": "distance",
+            "type": "number",
+            "default_value": "0"
+        },
+        {
+            "name": "routeros_version",
+            "type": "string",
+            "default_value": ""
+        },
+        {
+            "name": "last_ip",
+            "type": "string",
+            "default_value": ""
+        },
+        {
+            "name": "tx_rate_set",
+            "type": "string",
+            "default_value": ""
+        },
+        {
+            "name": "wmm_enabled",
+            "type": "string",
+            "default_value": "no"
+        }],
+    "bgp": [{
+            "name": "name",
+            "type": "string",
+            "default_value": ""
+        },
+        {
+            "name": "instance",
+            "type": "string",
+            "default_value": ""
+        },
+        {
+            "name": "remote_address",
+            "type": "string",
+            "default_value": "0.0.0.0"
+        },
+        {
+            "name": "remote_as",
+            "type": "number",
+            "default_value": ""
+        },
+        {
+            "name": "tcp_md5_key",
+            "type": "string",
+            "default_value": ""
+        },        
+        {
+            "name": "nexthop_choice",
+            "type": "string",
+            "default_value": ""
+        },           
+        {
+            "name": "multihop",
+            "type": "string",
+            "default_value": ""
+        },
+        {
+            "name": "route_reflect",
+            "type": "string",
+            "default_value": ""
+        },
+        {
+            "name": "hold_time",
+            "type": "string",
+            "default_value": ""
+        },       
+        {
+            "name": "ttl",
+            "type": "string",
+            "default_value": ""
+        },        
+        {
+            "name": "in_filter",
+            "type": "string",
+            "default_value": ""
+        },         
+        {
+            "name": "out_filter",
+            "type": "string",
+            "default_value": ""
+        },       
+        {
+            "name": "address_families",
+            "type": "string",
+            "default_value": ""
+        },
+        {
+            "name": "update_source",
+            "type": "string",
+            "default_value": ""
+        },        
+        {
+            "name": "default_originate",
+            "type": "string",
+            "default_value": ""
+        },  
+        {
+            "name": "remove_private_as",
+            "type": "string",
+            "default_value": ""
+        },         
+        {
+            "name": "as_override",
+            "type": "string",
+            "default_value": ""
+        },       
+        {
+            "name": "passive",
+            "type": "string",
+            "default_value": ""
+        },         
+        {
+            "name": "use_bfd",
+            "type": "string",
+            "default_value": ""
+        },      
+
+        {
+            "name": "remote_id",
+            "type": "string",
+            "default_value": ""
+        },
+        {
+            "name": "local_address",
+            "type": "string",
+            "default_value": ""
+        },
+        {
+            "name": "uptime",
+            "type": "string",
+            "default_value": ""
+        },
+        {
+            "name": "prefix_count",
+            "type": "string",
+            "default_value": ""
+        },
+        {
+            "name": "updates_sent",
+            "type": "string",
+            "default_value": ""
+        },        
+        {
+            "name": "updates_received",
+            "type": "string",
+            "default_value": ""
+        },      
+        {
+            "name": "withdrawn_sent",
+            "type": "string",
+            "default_value": ""
+        },         
+        {
+            "name": "withdrawn_received",
+            "type": "string",
+            "default_value": ""
+        },          
+        {
+            "name": "remote_hold_time",
+            "type": "string",
+            "default_value": ""
+        },             
+        {
+            "name": "used_hold_time",
+            "type": "string",
+            "default_value": ""
+        },          
+        {
+            "name": "used_keepalive_time",
+            "type": "string",
+            "default_value": ""
+        },  
+        {
+            "name": "refresh_capability",
+            "type": "string",
+            "default_value": ""
+        },  
+        {
+            "name": "as4_capability",
+            "type": "string",
+            "default_value": ""
+        },  
+        {
+            "name": "state",
+            "type": "string",
+            "default_value": "active"
+        }],
+    "arp": [{
+            "name": "address",
+            "type": "string",
+            "default_value": ""
+        },
+        {
+            "name": "mac_address",
+            "type": "string",
+            "default_value": ""
+        },
+        {
+            "name": "interface",
+            "type": "string",
+            "default_value": "0.0.0.0"
+        },
+        {
+            "name": "published",
+            "type": "string",
+            "default_value": ""
+        }]
+}
