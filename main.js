@@ -7,6 +7,7 @@ var moment = require('moment');
 var mysql = require('mysql');
 var TrigDT;
 var app_logger = log4js.getLogger('wugmsNodeSSHPoller');
+var fs = require('fs');
 
 log4js.configure(app_config.logger);
 
@@ -67,6 +68,13 @@ function getSplitValues(value, handle, parseddata) {
     }
 }
 
+function writeData(data, service) {
+    fn = moment().format("YYYYMMDD") + "_" + service + ".sql";
+    date_comment = "/* " + moment().format("YYYY/MM/DD HH:mm:ss.SSS") + " */ ";
+    fs.appendFileSync(fn, date_comment + "\r\n");
+    fs.appendFileSync(fn, data + "\r\n");
+}
+
 function parseValue(item, namedarray, handle, parseddata) {
     var ptype = handle.type;
     switch (ptype) {
@@ -81,7 +89,7 @@ function parseValue(item, namedarray, handle, parseddata) {
     }
 }
 
-function loadDataMySQL(sql_query_param) {
+function loadDataMySQL(sql_query_param, service) {
     var connection = mysql.createConnection({
         host: app_config.database.host,
         user: app_config.database.username,
@@ -91,6 +99,7 @@ function loadDataMySQL(sql_query_param) {
     connection.connect(function (err) {
         if (err) {
             app_logger.error('[MySQL] MySQL connecting... ' + err);
+            writeData(sql_query_param, service);
             return;
         }
         app_logger.debug('[MySQL] Connected as ID ' + connection.threadId);
@@ -98,6 +107,7 @@ function loadDataMySQL(sql_query_param) {
     connection.query(sql_query_param, function (error, results, fields) {
         if (error) {
             app_logger.error("[MySQL] Error; Code: " + error.code + " ; Errno: " + error.errno + " ; sqlState: " + error.sqlState + " ;   " + sql_query_param);
+            writeData(sql_query_param, service);
         } else {
             app_logger.info('[MySQL] Loading AP Client data: ' + sql_query_param);
         }
@@ -148,7 +158,7 @@ function parseBGPData(data_block, host, DateTime) {
         sql_fields += ")";
         sql_values += ")";
         var sql_query = "INSERT INTO tbl_base_bgp_peers " + sql_fields + "VALUES" + sql_values + " ON DUPLICATE KEY UPDATE " + sql_on_update + " ;";
-        loadDataMySQL(sql_query);
+        loadDataMySQL(sql_query, "bgp");
     }
 }
 
@@ -195,7 +205,7 @@ function parseARPData(data_block, host, DateTime) {
         sql_fields += ")";
         sql_values += ")";
         var sql_query = "INSERT INTO tbl_base_ip_arp " + sql_fields + "VALUES" + sql_values + " ON DUPLICATE KEY UPDATE " + sql_on_update + " ;";
-        loadDataMySQL(sql_query);
+        loadDataMySQL(sql_query, "arp");
     }
 }
 
@@ -224,6 +234,13 @@ function parseAPClientData(data_block, host, DateTime) {
             }
             parseValue(name, parsed_line, app_parsing_masks.ap_client[j], newarray);
         }
+        for (var j = 0; j < ap_client_mask_size; j++) {
+            var name = app_parsing_masks.ap_client[j].name;
+            if (!checkProperty(name, parsed_line)) {
+                parsed_line[name] = app_parsing_masks.ap_client[j].default_value;
+            }
+            parseValue(name, parsed_line, app_parsing_masks.ap_client[j], newarray);
+        }
         var sql_fields = "(rdate, host";
         var sql_values = "('" + DateTime + "','" + host + "'";
         var sql_on_update = "";
@@ -244,7 +261,7 @@ function parseAPClientData(data_block, host, DateTime) {
         sql_fields += ")";
         sql_values += ")";
         var sql_query = "INSERT INTO tbl_base_ap_clients " + sql_fields + "VALUES" + sql_values + " ON DUPLICATE KEY UPDATE " + sql_on_update + " ;";
-        loadDataMySQL(sql_query);
+        loadDataMySQL(sql_query, "ap_clients");
     }
 }
 
