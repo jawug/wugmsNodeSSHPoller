@@ -21,13 +21,7 @@
         "username": "wugms_dev",
         "password": "wugms_dev",
         "schema": "wugms_dev",
-        "host": "192.168.72.1",
+        "host": "127.0.0.1",
         "port": 3306
-    },
-    "mqtt": {
-        "server": "localhost",
-        "user": "wugmsbgp",
-        "password": "wugmsbgp",
-        "queuename": "wugms/bgp/peers"
     }
 }
